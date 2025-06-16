@@ -98,8 +98,9 @@ async function getLocationWithInventory(locationId: string) {
 export default async function LocationDetailPage({ 
   params 
 }: { 
-  params: { id: string } 
+  params: Promise<{ id: string }> 
 }) {
+  const { id } = await params
   const supabase = await createClient()
   
   // Check authentication
@@ -108,7 +109,7 @@ export default async function LocationDetailPage({
     redirect('/login')
   }
 
-  const location = await getLocationWithInventory(params.id)
+  const location = await getLocationWithInventory(id)
   
   if (!location) {
     notFound()
