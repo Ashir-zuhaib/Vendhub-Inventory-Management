@@ -32,7 +32,7 @@ A full-stack web application for managing vending machine inventory across multi
 ### 1. Clone and Install
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Ashir-zuhaib/Vendhub-Inventory-Management
 cd vending-machine-inventory
 npm install
 ```
