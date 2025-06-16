@@ -41,6 +41,16 @@ export async function middleware(request: NextRequest) {
   const isProtectedRoute = request.nextUrl.pathname.startsWith('/dashboard') || 
                           request.nextUrl.pathname.startsWith('/locations') ||
                           request.nextUrl.pathname.startsWith('/upload')
+  const isRootRoute = request.nextUrl.pathname === '/'
+
+  // Handle root route redirect
+  if (isRootRoute) {
+    if (user) {
+      return NextResponse.redirect(new URL('/dashboard', request.url))
+    } else {
+      return NextResponse.redirect(new URL('/login', request.url))
+    }
+  }
 
   if (isProtectedRoute && !user) {
     return NextResponse.redirect(new URL('/login', request.url))
